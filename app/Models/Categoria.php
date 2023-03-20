@@ -4,5 +4,6 @@ namespace App\Models;
 
 class Categoria extends RModel
 {
-    use HasFactory;
+    protected $table = "categorias";
+    protected $fillable = ['categoria'];
 }

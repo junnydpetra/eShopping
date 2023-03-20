@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{ProdutoController,
+                          ClienteController,
+                         };
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::match(['get', 'post'], '/', [ProdutoController::class, 'index'])->name('home');
+Route::match(['get', 'post'], '/categoria', [ProdutoController::class, 'categoria'])->name('categoria');
+Route::match(['get', 'post'], '/{id_categoria}/categoria', [ProdutoController::class, 'categoria'])->name('categoria_id');
+Route::match(['get', 'post'], '/cadastrar', [ClienteController::class, 'cadastrar'])->name('cadastrar');
+Route::match(['get', 'post'], '/{id_produto}/carrinho/add', [ProdutoController::class, 'addCarrinho'])->name('add_carrinho');
+Route::match(['get', 'post'], '/carrinhoadd', [ProdutoController::class, 'verCarrinho'])->name('ver_carrinho');
+
