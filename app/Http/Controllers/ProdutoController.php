@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Produto,
-                Categoria};
+use Illuminate\Support\Facades\Auth;
+use App\Models\{Produto, Categoria, Usuario};
+use App\Services\VendasService;
 
 class ProdutoController extends Controller
 {
@@ -69,6 +70,20 @@ class ProdutoController extends Controller
             unset($carrinho[$indice]);
         }
         session(['cart' => $carrinho]);
+        return redirect()->route('ver_carrinho');
+    }
+
+    public function finalizarCompra(Request $request)
+    {
+        $produtos = session('cart', []);
+        $vendaService = new VendasService();
+        $result = $vendaService->finalizarCompra($produtos, Auth::user());
+
+        if ($result['status'] == "ok") {
+            $request->session()->forget('cart');
+        }
+
+        $request->session()->flash($result['status'], $result['message']);
         return redirect()->route('ver_carrinho');
     }
 }

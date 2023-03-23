@@ -20,9 +20,11 @@
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                     <a class="nav-link" href="{{ route('categoria') }}">Categorias</a>
                     <a class="nav-link" href="{{ route('cadastrar') }}">Cadastro</a>
-                    {{-- @if (!Auth::user()) --}}
+                    @if (!Auth::user())
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    {{-- @endif --}}
+                    @else
+                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                    @endif
                 </div>
             </div>
             <a href="{{ route('ver_carrinho') }}" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
@@ -33,7 +35,7 @@
 
                 @if(Auth::user())
                     <div class="col-12">
-                        <p class="text-right">Olá, {{ Auth::user()->nome }}</p>
+                        <p class="text-right">Olá, {{ Auth::user()->nome }}! <a href="{{ route('logout') }}">Sair</a></p>
                     </div>
                 @endif
 

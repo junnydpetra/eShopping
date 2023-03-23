@@ -14,8 +14,9 @@
                     <th>Descrição</th>
                 </tr>
             </thead>
-            @foreach ($cart as $indice => $produto)
-                <tbody>
+            <tbody>
+                @php $total=0; @endphp
+                @foreach ($cart as $indice => $produto)
                     <tr>
                         <td>
                             <a href="{{ route('delete_carrinho', ['indice' => $indice]) }}" class="btn btn-sm btn-danger border border-dark">
@@ -27,9 +28,25 @@
                         <td>{{ $produto->valor }}</td>
                         <td>{{ $produto->descricao }}</td>
                     </tr>
-                </tbody>
-            @endforeach
+                    @php $total = $total + $produto->valor; @endphp
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        Total: R${{ $total }}
+                    </td>
+                </tr>
+            </tfoot>
         </table>
+
+        <div class="pull-right">
+            <form action="{{ route('finalizar_carrinho') }}" method="post">
+                @csrf
+                <input type="submit" value="Finalizar Compra" class="btn btn-lg btn-success border border-dark">
+            </form>
+        </div>
+
     @else
         <p>Carrinho vazio!</p>
     @endif

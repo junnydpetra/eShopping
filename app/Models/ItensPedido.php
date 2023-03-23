@@ -5,5 +5,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ItensPedido extends RModel
 {
-    use HasFactory;
+    protected $table = "itens_pedidos";
+    protected $fillable = ['quantidade', 'valor', 'dt_item', 'produto_id', 'pedido_id'];
 }
