@@ -8,6 +8,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>eShopping</title>
+        @yield('scriptjs')
     </head>
 
     <body>
@@ -16,16 +17,38 @@
             <a href="#" class="navbar-brand">eShopping</a>
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="{{route('home')}}">Home</a>
-                    <a class="nav-link" href="{{route('categoria')}}">Categorias</a>
-                    <a class="nav-link" href="{{route('cadastrar')}}">Cadastro</a>
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link" href="{{ route('categoria') }}">Categorias</a>
+                    <a class="nav-link" href="{{ route('cadastrar') }}">Cadastro</a>
+                    {{-- @if (!Auth::user()) --}}
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    {{-- @endif --}}
                 </div>
             </div>
-            <a href="{{route('ver_carrinho')}}" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
+            <a href="{{ route('ver_carrinho') }}" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
         </nav>
 
         <div class="container">
             <div class="row">
+
+                @if(Auth::user())
+                    <div class="col-12">
+                        <p class="text-right">Olá, {{ Auth::user()->nome }}</p>
+                    </div>
+                @endif
+
+                @if($message = Session::get('err'))
+                    <div class="col-12">
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    </div>
+                @endif
+
+                @if ($message = Session::get('ok'))
+                    <div class="col-12">
+                        <div class="alert alert-success">{{ $message }}</div>
+                    </div>
+                @endif
+
                 @yield('content')
             </div>
         </div>

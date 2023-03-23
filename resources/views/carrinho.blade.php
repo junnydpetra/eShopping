@@ -7,24 +7,25 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Nome</th>
                     <th>Foto</th>
                     <th>Valor</th>
                     <th>Descrição</th>
                 </tr>
             </thead>
-            @foreach ($cart as $produto)
+            @foreach ($cart as $indice => $produto)
                 <tbody>
                     <tr>
                         <td>
-                            <a href="#" class="btn btn-sm btn-danger border border-dark">
+                            <a href="{{ route('delete_carrinho', ['indice' => $indice]) }}" class="btn btn-sm btn-danger border border-dark">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
-                        <td>{{$produto->name}}</td>
-                        <td><img src="{{asset($produto->foto)}}" height="50"></td>
-                        <td>{{$produto->valor}}</td>
-                        <td>{{$produto->descricao}}</td>
+                        <td>{{ $produto->name }}</td>
+                        <td><img src="{{ asset($produto->foto) }}" height="50"></td>
+                        <td>{{ $produto->valor }}</td>
+                        <td>{{ $produto->descricao }}</td>
                     </tr>
                 </tbody>
             @endforeach
