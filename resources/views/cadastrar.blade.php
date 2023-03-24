@@ -78,6 +78,6 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Cadastrar" class="btn btn-success btn-sm border border-dark">
+        <input type="submit" value="Cadastrar" class="btn btn-success btn-sm border border-dark mt-1">
     </form>
 @endsection

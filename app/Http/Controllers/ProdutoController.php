@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Produto, Categoria, Usuario};
+use App\Models\{Produto, Categoria, Pedido, Usuario};
 use App\Services\VendasService;
 
 class ProdutoController extends Controller
@@ -85,5 +85,24 @@ class ProdutoController extends Controller
 
         $request->session()->flash($result['status'], $result['message']);
         return redirect()->route('ver_carrinho');
+    }
+
+    public function historico(Request $request)
+    {
+        $data = [];
+        $idUsuario = Auth::user()->id;
+        $listaPedidos = Pedido::where('usuario_id', $idUsuario)
+                            ->orderBy('data_pedido', 'desc')
+                            ->get();
+
+        $data['lista_pedidos'] = $listaPedidos;
+
+        return view('compra.historico', $data);
+    }
+
+    public function detalhes(Request $request)
+    {
+        $id_pedido = $request->input('id_pedido');
+        echo "Detalhes de pedido: " . $id_pedido;
     }
 }

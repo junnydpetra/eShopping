@@ -23,7 +23,7 @@
                 Password: <input type="password" name="senha" class="form-control">
             </div>
 
-            <input type="submit" value="Login" class="btn btn-lg btn-primary">
+            <input type="submit" value="Login" class="btn btn-sm btn-primary border border-dark mt-1">
         </form>
 
     </div>

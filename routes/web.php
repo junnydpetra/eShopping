@@ -21,3 +21,5 @@ Route::match(['get', 'post'], '/carrinho_add', [ProdutoController::class, 'verCa
 Route::match(['get', 'post'], '/{indice}/carrinho_delete', [ProdutoController::class, 'deleteCarrinho'])->name('delete_carrinho');
 Route::post('/carrinho/finalizar', [ProdutoController::class, 'finalizarCompra'])->name('finalizar_carrinho');
 
+Route::match(['get', 'post'],'/compras/historico', [ProdutoController::class, 'historico'])->name('compras_historico');
+Route::post('/compras/detalhes', [ProdutoController::class, 'detalhes'])->name('detalhes_pedido');
