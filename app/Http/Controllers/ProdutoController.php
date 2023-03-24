@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Produto, Categoria, Pedido, Usuario};
+use App\Models\{Produto, Categoria, ItensPedido, Pedido, Usuario};
 use App\Services\VendasService;
 
 class ProdutoController extends Controller
@@ -102,7 +102,17 @@ class ProdutoController extends Controller
 
     public function detalhes(Request $request)
     {
-        $id_pedido = $request->input('id_pedido');
-        echo "Detalhes de pedido: " . $id_pedido;
+        // $id_pedido = $request->input('id_pedido');
+        // echo "Detalhes de pedido: " . $id_pedido;
+
+        $idPedido = $request->input('id_pedido');
+
+        $listaItens = ItensPedido::join('produtos', 'produtos.id', '=', 'itens_pedidos.produto_id')
+                                 ->where('pedido_id', $idPedido)
+                                 ->get(['itens_pedidos.*', 'itens_pedidos.valor as valorItem', 'produtos.*']);
+
+        $data = [];
+        $data['listaItens'] = $listaItens;
+        return view('/compra/detalhes', $data);
     }
 }

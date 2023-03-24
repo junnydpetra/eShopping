@@ -7,7 +7,7 @@
 
     @foreach ($listaItens as $item)
         <tr>
-            <td>{{ $item->nome }}</td>
+            <td>{{ $item->name }}</td>
             <td>{{ $item->quantidade }}</td>
             <td>{{ $item->valorItem }}</td>
         </tr>
