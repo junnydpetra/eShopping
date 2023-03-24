@@ -97,14 +97,11 @@ class ProdutoController extends Controller
 
         $data['lista_pedidos'] = $listaPedidos;
 
-        return view('compra.historico', $data);
+        return view('compras.historico', $data);
     }
 
     public function detalhes(Request $request)
     {
-        // $id_pedido = $request->input('id_pedido');
-        // echo "Detalhes de pedido: " . $id_pedido;
-
         $idPedido = $request->input('id_pedido');
 
         $listaItens = ItensPedido::join('produtos', 'produtos.id', '=', 'itens_pedidos.produto_id')
@@ -113,6 +110,13 @@ class ProdutoController extends Controller
 
         $data = [];
         $data['listaItens'] = $listaItens;
-        return view('/compra/detalhes', $data);
+        return view('/compras/detalhes', $data);
+    }
+
+    public function pagamento(Request $request)
+    {
+        $data = [];
+
+        return view('/compras/pagamento', $data);
     }
 }

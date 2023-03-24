@@ -41,7 +41,7 @@
         </table>
 
         <div class="pull-right">
-            <form action="{{ route('finalizar_carrinho') }}" method="post">
+            <form action="{{ route('pagamento') }}" method="post">
                 @csrf
                 <input type="submit" value="Finalizar Compra" class="btn btn-lg btn-success border border-dark">
             </form>

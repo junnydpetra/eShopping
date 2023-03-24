@@ -18,15 +18,15 @@
     </div>
 
     <div class="col-12">
-        <table class="table table-bordered">
-            <tr>
+        <table class="table table-bordered border border-dark">
+            <tr class="text-center">
                 <th>Data de Pedido</th>
                 <th>Status</th>
-                <th></th>
+                <th>Detalhes</th>
             </tr>
 
             @foreach ($lista_pedidos as $pedido)
-                <tr>
+                <tr class="text-center">
                     <td>{{ $pedido->data_pedido->format('d/m/Y H:i') }}</td>
                     <td>{{ $pedido->statusDesc() }}</td>
                     <td class="text-center">
@@ -36,7 +36,6 @@
                     </td>
                 </tr>
             @endforeach
-
         </table>
     </div>
 
